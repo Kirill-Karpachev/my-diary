@@ -1,0 +1,6 @@
+.button_mobile {
+  background-color: var(--navy-color);
+  padding: 16px 18px;
+  border-radius: 50%;
+  border: 0;
+}

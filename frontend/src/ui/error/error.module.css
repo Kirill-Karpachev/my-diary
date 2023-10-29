@@ -1,0 +1,12 @@
+.error {
+  display: flex;
+  align-items: center;
+  color: var(--error-color);
+  gap: 5px;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 110%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

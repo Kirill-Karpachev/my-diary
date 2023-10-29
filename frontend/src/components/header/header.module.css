@@ -1,0 +1,37 @@
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 40px;
+  max-width: 1920px;
+  min-width: 375px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.header_button {
+  max-width: 350px;
+}
+
+.header_button_mobile {
+  background-color: var(--navy-color);
+  padding: 16px 18px;
+  border-radius: 50%;
+  border: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .header_container {
+    padding: 7px 20px 14px;
+  }
+
+  .logo {
+    max-width: 312px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .logo {
+    max-width: 188px;
+  }
+}

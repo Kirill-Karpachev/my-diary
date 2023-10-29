@@ -1,0 +1,47 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    restart: always
+    ports:
+      - 4000:4000
+    depends_on:
+      - mongo
+    networks:
+      - database
+      - default
+
+  mongo:
+    container_name: database
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    env_file:
+      - ./backend/.env
+    volumes:
+      - db_data:/data/db
+      - db_config:/data/configdb
+    networks:
+      - database
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8081:80
+
+networks:
+  database:
+
+volumes:
+  db_data:
+  db_config:

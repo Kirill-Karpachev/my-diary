@@ -1,0 +1,23 @@
+.button {
+  text-transform: uppercase;
+  padding: 42px 120px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #050F28;
+  border-radius: 65px;
+  border: 0;
+  cursor: pointer;
+  transition: all .2s linear;
+  font-family: 'Nunito';
+}
+
+.button:hover {
+  background-color: #88A1DE;
+}
+
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}

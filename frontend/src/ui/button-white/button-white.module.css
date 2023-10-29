@@ -1,0 +1,20 @@
+.button {
+  text-transform: uppercase;
+  padding: 42px 107px;
+  box-sizing: border-box;
+  color: #050F28;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: #fff;
+  border-radius: 50px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  width: 100%;
+  transition: all .2s linear;
+  font-family: 'Nunito';
+}
+
+.button:hover {
+  background-color: #F6F6F6;
+  border-color: #88A1DE;
+}
