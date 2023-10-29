@@ -31,36 +31,42 @@
 
 Клонировать репозиторий:
 
-    git clone https://github.com/MrStnr21/botkits-14-frontend.git
+    git clone https://github.com/Kirill-Karpachev/my-diary.git
+
+### Если есть Docker:
+
+    docker compose up
+
+### Если нет Docker:
+
+Перейти в папку backend:
+
+    cd backend
 
 Установить зависимости:
 
     npm install
 
-Собрать проект:
-
-    npm run build
-
 Запустить проект:
 
     npm run start
 
+Перейти в папку frontend:
+
+    cd frontend
+
+Установить зависимости:
+
+    npm install
+
+Запустить проект:
+
+    npm run dev
+
 ## Макет проектной работы в Figma:
 
-- [Макет](<https://www.figma.com/file/89caTZSLaLwqYKSWH4SXLo/BOTkit-Admin-panel-(Copy-07.08.23)?type=design&node-id=26-24906&mode=design&t=5VY052C7pfGFpugE-0>)
+- [Макет](https://www.figma.com/file/Jl0fTIgR0oWVaVhLLbI5or/Mockup-sample?type=design&mode=design)
 
-## Бриф проектной работы в notion:
+## Бриф проектной работы:
 
-- [Бриф](https://www.notion.so/BotKits-14-web-195fad87a50d4ad58a4e5d6fb5ea4e25)
-
-#### Создано в соавторстве
-
-- 👨‍💻 [Екатерина Бычихина](https://github.com/BychikhinaE)
-- 👨‍💻 [Екатерина Столбова](https://github.com/rainbowpieeee)
-- 👨‍💻 [Кирилл Карпачев](https://github.com/Kirill-Karpachev)
-- 👨‍💻 [Михаил Карелин](https://github.com/Kimer1990)
-- 👨‍💻 [Славяна Родина](https://github.com/SlavyanaR)
-- 👨‍💻 [Руслан Ахмадиев](https://github.com/Qolit3)
-- 👨‍💻 [Константин Ванчуренков](https://github.com/Wacorasu)
-- 👨‍💻 [Максим Тищенко](https://github.com/maxtish)
-- 👨‍💻 [Ярослав Потрапелюк](https://github.com/MrStnr21)
+- [Бриф](https://dynalist.io/d/6g-cygRRKeb1_czYVukCetKd)
