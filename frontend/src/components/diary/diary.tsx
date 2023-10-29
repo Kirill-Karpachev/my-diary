@@ -3,22 +3,27 @@ import { diaryAPI } from "../../services/diary-service";
 
 import DiaryItem from "../diary-item/diary-item";
 
-import { ButtonFilter, ButtonWhite } from "../../ui";
+import { ButtonFilter, ButtonPagination, ButtonWhite } from "../../ui";
 import ArrowLeftSVG from "../../assets/icons/arrow-left.svg";
 import ArrowRightSVG from "../../assets/icons/arrow-right.svg";
 
 import styles from "./diary.module.css";
+import useModal from "../../hooks/use-modal";
+import Modal from "../modal/modal";
+import ModalDiaryItem from "../modal-diary-item/modal-diary-item";
 
 const Diary = () => {
   const [sort, setSort] = useState<"ask" | "desk">("ask");
   const [page, setPage] = useState(0);
   const [limit, setLimit] = useState(6);
+  const [totalPage, setTotalPage] = useState(0);
+  const [idItem, setIdItem] = useState<string>("");
   const { data: diary } = diaryAPI.useGetAllDiaryQuery({
     sort,
     page,
     limit,
   });
-  const [totalPage, setTotalPage] = useState(0);
+  const { closeModal, isModalOpen, openModal } = useModal();
 
   const pagesArray: number[] = [];
   for (let i = 0; i < totalPage; i++) {
@@ -58,6 +63,10 @@ const Diary = () => {
               title={item.title}
               description={item.description}
               date={item.date}
+              onClick={() => {
+                setIdItem(item._id);
+                openModal();
+              }}
             />
           ))}
         </ul>
@@ -85,14 +94,7 @@ const Diary = () => {
             </li>
             {pagesArray.map((item) => (
               <li key={item}>
-                <button
-                  className={`${styles.button_pagination} ${
-                    page + 1 === item && styles.button_pagination_active
-                  }`}
-                  onClick={() => setPage(item - 1)}
-                >
-                  {item}
-                </button>
+                <ButtonPagination item={item} page={page} setPage={setPage} />
               </li>
             ))}
             <li>
@@ -108,6 +110,12 @@ const Diary = () => {
           </ul>
         )}
       </div>
+
+      {isModalOpen && (
+        <Modal onClick={closeModal}>
+          <ModalDiaryItem id={idItem} onClick={closeModal} />
+        </Modal>
+      )}
     </main>
   );
 };

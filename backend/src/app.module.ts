@@ -8,7 +8,7 @@ import { PostsModule } from './posts/posts.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env'],
+      envFilePath: ['.env.dev', '.env'],
     }),
     MongooseModule.forRootAsync(databaseConfig()),
     PostsModule,

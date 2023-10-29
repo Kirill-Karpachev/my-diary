@@ -37,11 +37,11 @@ export class PostsService {
     return await this.postModel.findById(id);
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: string, updatePostDto: UpdatePostDto) {
+    return await this.postModel.findByIdAndUpdate(id, updatePostDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: string) {
+    return await this.postModel.findByIdAndDelete(id);
   }
 }

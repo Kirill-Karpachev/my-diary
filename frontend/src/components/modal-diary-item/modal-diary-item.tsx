@@ -1,19 +1,21 @@
 import { FC, FormEvent, useEffect, useState } from "react";
 import useForm from "../../hooks/use-form";
 import { validation } from "../../utils/validation";
+import styles from "./modal-diary-item.module.css";
 import { diaryAPI } from "../../services/diary-service";
+import { Button, Error } from "../../ui";
+import { format } from "date-fns";
 
-import { Button } from "../../ui";
-import Error from "../../ui/error/error";
-
-import styles from "./diary-form.module.css";
-
-interface IDiaryForm {
+interface IModalDiaryItem {
   onClick: () => void;
+  id: string;
 }
-
-const DiaryForm: FC<IDiaryForm> = ({ onClick }) => {
-  const { values, handleChange } = useForm({
+// можно лучше, сделать один компонент с diary-form
+const ModalDiaryItem: FC<IModalDiaryItem> = ({ onClick, id }) => {
+  const { data: post, isSuccess, refetch } = diaryAPI.useGetPostByIdQuery(id);
+  const [updatePostDiary] = diaryAPI.useUpdatePostDiaryMutation();
+  const [deletePostDiary] = diaryAPI.useDeletePostDiaryMutation();
+  const { values, handleChange, setValues } = useForm({
     title: "",
     date: "",
     description: "",
@@ -25,7 +27,16 @@ const DiaryForm: FC<IDiaryForm> = ({ onClick }) => {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  const [postDiary] = diaryAPI.usePostDiaryMutation();
+  useEffect(() => {
+    refetch();
+    if (isSuccess) {
+      setValues({
+        title: post?.title,
+        date: format(new Date(post.date), "yyyy-MM-dd'T'HH:mm:ss.SSS"),
+        description: post?.description,
+      });
+    }
+  }, [isSuccess]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,14 +46,18 @@ const DiaryForm: FC<IDiaryForm> = ({ onClick }) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submitting) {
-      postDiary(values);
+      updatePostDiary({ id, item: values });
       onClick();
     }
   }, [errors]);
 
+  const handleDelete = () => {
+    deletePostDiary(id);
+    onClick();
+  };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h3 className={styles.form_title}>Новая запись</h3>
+      <h3 className={styles.form_title}>Редактировать запись</h3>
 
       <div className={styles.form_inputs_container}>
         <div className={styles.form_inputs}>
@@ -92,9 +107,17 @@ const DiaryForm: FC<IDiaryForm> = ({ onClick }) => {
         </label>
       </div>
 
-      <Button text="Поделиться наболевшим" extraClass={styles.modal_button} />
+      <div className={styles.buttons}>
+        <Button text="Сохранить изменения" extraClass={styles.modal_button} />
+        <Button
+          text="Удалить запись"
+          extraClass={`${styles.modal_button} ${styles.modal_button_delete}`}
+          type="button"
+          onClick={() => handleDelete()}
+        />
+      </div>
     </form>
   );
 };
 
-export default DiaryForm;
+export default ModalDiaryItem;

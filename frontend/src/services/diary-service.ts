@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Key } from "react";
 
 interface IDiaryDate {
-  _id: Key | null | undefined;
+  _id: string;
   title: string;
   description: string;
   date: string;
@@ -34,11 +33,33 @@ export const diaryAPI = createApi({
       },
       providesTags: () => ["Post"],
     }),
+    getPostById: build.query<IDiaryDate, string>({
+      query: (id) => {
+        return {
+          url: `posts/${id}`,
+        };
+      },
+    }),
     postDiary: build.mutation<IDiary, string>({
       query: (item) => ({
         url: "posts",
         method: "POST",
         body: item,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    updatePostDiary: build.mutation<IDiary, { id: string; item: IDiaryDate }>({
+      query: ({ id, item }) => ({
+        url: `posts/${id}`,
+        method: "PATCH",
+        body: item,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    deletePostDiary: build.mutation<string, string>({
+      query: (id) => ({
+        url: `posts/${id}`,
+        method: "DELETE",
       }),
       invalidatesTags: ["Post"],
     }),

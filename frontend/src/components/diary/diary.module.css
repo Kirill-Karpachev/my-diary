@@ -65,10 +65,6 @@
   cursor: pointer;
 }
 
-.button_pagination_active {
-  color: var(--light-blue-color);
-}
-
 @media screen and (max-width: 1024px) {
   .list {
     grid-template-columns: repeat(2, minmax(355px, 587px));

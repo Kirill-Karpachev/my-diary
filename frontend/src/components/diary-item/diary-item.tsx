@@ -10,14 +10,15 @@ interface IDiaryItem {
   title: string;
   description: string;
   date: string;
+  onClick?: () => void;
 }
 
-const DiaryItem: FC<IDiaryItem> = ({ title, description, date }) => {
+const DiaryItem: FC<IDiaryItem> = ({ title, description, date, onClick }) => {
   const day = format(new Date(date), "dd.MM.y");
-  const clock = format(new Date(date), "kk:mm");
+  const clock = format(new Date(date), "HH:mm");
 
   return (
-    <li className={styles.item}>
+    <li className={styles.item} onClick={onClick}>
       <div>
         <h2 className={styles.title}>{title}</h2>
 

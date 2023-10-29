@@ -1,0 +1,16 @@
+.button_pagination {
+  color: var(--navy-color);
+  background-color: var(--grey-color);
+  font-family: "Nunito";
+  border: none;
+  font-size: 22px;
+  line-height: 90%;
+  letter-spacing: 100%;
+  padding: 0;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button_pagination_active {
+  color: var(--light-blue-color);
+}
