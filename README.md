@@ -53,7 +53,7 @@
 
 Перейти в папку frontend:
 
-    cd frontend
+    cd ../frontend
 
 Установить зависимости:
 
