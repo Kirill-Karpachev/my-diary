@@ -36,8 +36,7 @@ const ModalDiaryItem: FC<IModalDiaryItem> = ({ onClick, id }) => {
         description: post?.description,
       });
     }
-  }, [isSuccess]);
-
+  }, [isSuccess, post?.date, post?.description, post?.title, refetch, setValues]);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrors(validation(values));
@@ -48,6 +47,11 @@ const ModalDiaryItem: FC<IModalDiaryItem> = ({ onClick, id }) => {
     if (Object.keys(errors).length === 0 && submitting) {
       updatePostDiary({ id, item: values });
       onClick();
+      setValues({
+        title: "",
+        date: "",
+        description: "",
+      });
     }
   }, [errors]);
 
